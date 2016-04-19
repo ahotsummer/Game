@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relayout"
+    android:background="@drawable/bg_main" >
+
+    <View
+        android:id="@+id/popView"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/pop" /> 
+    
+
+    <View
+        android:id="@+id/starView"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/star" />
+
+    <Button
+        android:id="@+id/btn_rate"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/btn_start"
+        android:layout_below="@+id/btn_start"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/rate" />
+
+    <Button
+        android:id="@+id/btn_resume"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/btn_rate"
+        android:layout_below="@+id/btn_rate"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/resume" />
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/btn_resume"
+        android:layout_below="@+id/btn_resume"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/exit" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/newgame" />
+   			 
+     
+	<!-- 爆炸色 -->
+	<ImageView
+	    android:id="@+id/animation1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/popView"
+	    android:src="@anim/friwork1" />
+	 <!-- 紫色 -->
+	<ImageView
+	    android:id="@+id/animation2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/starView"   
+	    android:src="@anim/friwork2" />
+    <!-- 黄色 -->
+
+	<ImageView
+	    android:id="@+id/animation"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="170dp"
+	    android:layout_marginLeft="15dp"
+	    android:src="@anim/friwork" />
+	
+	<ImageView 
+	android:id="@+id/light_pink"
+	android:layout_width="170dp" 
+	android:layout_height="170dp" 
+	android:scaleType="fitCenter"
+	android:src="@drawable/light_pink"
+	android:layout_marginLeft="270dp"
+    android:layout_marginTop="150dp"
+	/>
+	<ImageView 
+	android:id="@+id/light_blue"
+	android:layout_width="180dp" 
+	android:layout_height="180dp" 
+	android:scaleType="fitCenter"
+	android:src="@drawable/light_blue"
+	android:layout_marginTop="75dp"
+	android:layout_marginLeft="115dp"
+	/>
+	
+	
+	
+	<ImageView 
+	android:id="@+id/light_yellow" 
+	android:layout_width="70dp"
+    android:layout_height="70dp"
+	android:scaleType="fitCenter"
+	android:src="@drawable/light_yellow"
+	android:layout_marginTop="170dp"
+	android:layout_marginLeft="3dp"
+	/>
+
+<ImageView 
+	android:id="@+id/light_green"
+	android:layout_width="70dp"
+    android:layout_height="70dp"
+	android:scaleType="fitCenter"
+	android:src="@drawable/light_green"
+	android:layout_marginTop="43dp"
+	android:layout_marginLeft="7dp"
+	/>
+	
+<ImageView 
+	android:id="@+id/light_red"
+	android:layout_width="90dp"
+    android:layout_height="90dp"
+	android:scaleType="fitCenter"
+	android:src="@drawable/light_red"
+	android:layout_marginTop="41dp"
+	android:layout_marginLeft="100dp"
+	/>
+<ImageView 
+	android:id="@+id/rankIV"
+	android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+	android:src="@drawable/level_1"
+	android:layout_marginTop="1dp"
+	android:layout_marginLeft="20dp"
+	/>
+<TextView 
+    android:id="@+id/rankTV"
+	android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:layout_marginTop="20dp"
+	android:layout_toRightOf="@+id/rankIV"
+    />
+
+
+<ImageView 
+	android:id="@+id/rankstarIV"
+	android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+	android:src="@drawable/level_0"
+	android:layout_marginTop="8dp"
+	android:layout_marginLeft="225dp"
+	/>
+<TextView 
+    android:id="@+id/rankstarTV"
+	android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:layout_marginTop="20dp"
+	android:layout_toRightOf="@+id/rankstarIV"
+	/>
+
+
+
+
+
+
+
+</RelativeLayout>

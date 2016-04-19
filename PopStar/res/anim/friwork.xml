@@ -1,0 +1,17 @@
+<animation-list
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:oneshot="false">
+  	<item android:drawable="@raw/fw5_01" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_02" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_03" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_04" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_05" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_06" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_07" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_08" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_09" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_10" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_11" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_12" android:duration="200"></item>
+  	<item android:drawable="@raw/fw5_13" android:duration="200"></item>
+</animation-list>
