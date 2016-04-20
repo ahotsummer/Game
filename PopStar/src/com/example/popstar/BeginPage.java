@@ -3,8 +3,6 @@ package com.example.popstar;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,9 +10,8 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -24,6 +21,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.bmob.v3.Bmob;
 
 import com.example.popstar.db.scoreSQLiteOpenHelper;
 //import com.example.popstar.utils.FriworkAnimation;
@@ -42,10 +41,15 @@ public class BeginPage extends Activity {
 	private Button btn_resume;
 	private Button btn_exit;
 	private int state[][];//重新加载的游戏画面数组
+	private int rrank;
+	private int rscore;
 	private String ss;
+	private String rr;
+	private String cc;
+	
 	public String  score;
 	public String  rank;
-
+	private  long clickTime;
 	// 背景音乐播放MediaPlayer对象
 	private MediaPlayer player;
 	private Music music;
@@ -80,6 +84,9 @@ public class BeginPage extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Bmob.initialize(this, "aaf472e2b51fd08faa7c37e71a7e715d");
+		
 		// 隐去Android顶部状态栏
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -90,24 +97,8 @@ public class BeginPage extends Activity {
 				
 		// 从raw文件夹中获取一个音乐资源文件
 		player = MediaPlayer.create(this, R.raw.start);
-	    //tv
-	//	ranktv =(TextView)findViewById(R.id.rankTV);
-	//	rankstartv =(TextView)findViewById(R.id.rankstarTV);
-		
-	/*	new Thread()
-		{
-			public void run()
-			{		
-				helper = new scoreSQLiteOpenHelper(BeginPage.this,null,null,0);
-				//	helper.getRank();
-					int a =helper.rank;
-					Log.i("rank",""+a);
-					ranktv.setText(""+a);
-					rankstartv.setText(a*2+"颗");
-			}
-			
-		}.start();
-	  */
+	   
+	
        
           
 		
@@ -163,10 +154,14 @@ public class BeginPage extends Activity {
 			public void onClick(View v) {
 				
 				loadGameProgress();
-				if (state != null) {
+			//	if (state != null&&rrank!=0&&rscore!=0)
+				if (state != null)
+				{
 					Intent intent = new Intent();
 					intent.putExtra("matrix", state);//传送额外信息
-					intent.setClass(BeginPage.this, MainActivity.class);
+					/*intent.putExtra("rrank", rrank);//传送额外信息
+					intent.putExtra("rscore", rscore);//传送额外信息
+*/					intent.setClass(BeginPage.this, MainActivity.class);
 					
 					startActivityForResult(intent, 101);//保存当前游戏进度
 					overridePendingTransition(android.R.anim.fade_in,
@@ -215,12 +210,7 @@ public class BeginPage extends Activity {
 		light_pink= (ImageView)findViewById(R.id.light_pink);
 		// 加载第一份动画资源
 		
-		//light_red.startAnimation(anims);	
-	//	light_yellow.startAnimation(anims);
-	//	light_blue.startAnimation(anims);
-	//	light_green.startAnimation(anims);
-	//	light_pink.startAnimation(anims);
-	//	light_red.startAnimation(reverse);
+		
 		light_red.startAnimation(reverse);
 		light_yellow.startAnimation(reverse);
 		light_blue.startAnimation(reverse);
@@ -239,11 +229,21 @@ public class BeginPage extends Activity {
 			SharedPreferences settings = getSharedPreferences(PREFS_STRING,
 					MODE_PRIVATE);
 			String progress = settings.getString("PROGRESS", "abc");//读PROGRESS的数据，“abc”类型
+			/*String rank = settings.getString("RRANK", "abc");
+			String score = settings.getString("RSCORE", "abc");*/
 			if (!progress.equals("abc")) {
 				state = new int[10][10];
-				state = Utils.str2array(progress);
+				state = Utils.str2array(progress);		
 			}
-
+		/*	if (!rank.equals("abc")) {			
+				rrank = Utils.rank;
+		
+			}
+			if (!score.equals("abc")) {
+				rscore = Utils.score;
+			}
+			*/
+			
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -257,8 +257,12 @@ public class BeginPage extends Activity {
 				MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();//写数据ss
 		String progress = ss;//ss==页面传来的10*10数组string方法
+		/*String rank =rr;
+		String score =cc;*/
 		// 将数据保存
 		editor.putString("PROGRESS", progress);
+	/*	editor.putString("RRANK", rank);
+		editor.putString("RSCORE", score);*/
 		editor.commit();
 	}
 
@@ -268,10 +272,7 @@ public class BeginPage extends Activity {
 		// 设置无限循环，然后启动播放
 		player.setLooping(true);
 		player.start();
-		/*for(int i=1;i<5;i++){
-			music.setLoop(i);
-			music.play(i);
-			}*/
+		
 		
 	}
 
@@ -282,9 +283,7 @@ public class BeginPage extends Activity {
 		if (player.isPlaying()) {
 			player.pause();			
 		}	
-			
-		
-						
+							
 			
 	}
 
@@ -293,28 +292,20 @@ public class BeginPage extends Activity {
 		super.onDestroy();
 		// 停止播放,释放资源
 		player.release();
-	/*	for(int i=1;i<5;i++)
-		{
-			music.unload(i);
-		}
-		music.release();*/
+	
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == 1) {
 			ss = data.getStringExtra("PROGRESS");
+			/*rr = data.getStringExtra("RRANK");
+			cc = data.getStringExtra("RSCORE");*/
 			saveGameProgress();
+			
 			srank=data.getStringExtra("SRANK");
 			rank=data.getStringExtra("RANK");
 			score=data.getStringExtra("SCORE");
-			if(srank!=null)
-			{
-		//		rankMax = Integer.parseInt(srank);
-		//		Log.i("srank",srank);
-		//		ranktv.setText(rankMax+"级");
-		//		rankstartv.setText(rankMax*2+"颗");
-			}
 			
 						
 		}
@@ -322,4 +313,25 @@ public class BeginPage extends Activity {
 	}
 
 
+	public boolean onKeyDown(int keyCode,KeyEvent event)
+	{
+		switch(keyCode)
+		{
+			case KeyEvent.KEYCODE_BACK:
+				
+			if ((System.currentTimeMillis() - clickTime) > 2000) {  
+				        Toast.makeText(getApplicationContext(), "再按一次后退键退出程序",Toast.LENGTH_SHORT).show();  
+				         clickTime = System.currentTimeMillis();  
+			}else{
+					this.finish();
+			}
+			
+				return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	
+	
+	
 }

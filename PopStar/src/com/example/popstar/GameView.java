@@ -13,14 +13,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
-
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 import com.example.popstar.db.scoreSQLiteOpenHelper;
+import com.example.popstar.db.bomb.GameScore;
+import com.example.popstar.db.bomb.LuckyStar;
+import com.example.popstar.db.bomb.UseStar;
 //import com.example.popstar.utils.FriworkAnimation;
 
 
@@ -99,6 +102,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private Paint paint; // 绘制几何图形的画笔
 	private Paint p_text; // 绘制几何图形的画笔
 	
+	//bombdata
+	private GameScore gameScore ;
+	private LuckyStar luckystar ;
+	private UseStar usestar ;
+	
+	
 	Random random;
 	
 	//星星粒子图片的数组
@@ -129,6 +138,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		music  = new Music(context);
 		random=new Random();
 		
+		//bombdata
+		GameScore gameScore = new GameScore();
+		LuckyStar luckystar = new LuckyStar() ;
+		UseStar usestar = new UseStar();
+		
 		// 获取holder，以便我们控制游戏界面的刷新工作
 		holder = this.getHolder();
 		holder.addCallback(this);
@@ -155,13 +169,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	
 	
 	public Animation makeAnimation(float playDuration, float x, float y,int acolor) {
-	//	if (bmps == null) {
-			// 加载动画资源，创建动画对象
+		// 加载动画资源，创建动画对象
 		if(acolor==0){
 			bmps = new Bitmap[10];
-			//bmps[0] = BitmapFactory.decodeResource(getResources(), id)
 			bmps[0] = getRes(R.raw.p1);
-				//	= getRes(R.raw.p1);
 			bmps[1] = getRes(R.raw.p2);
 			bmps[2] = getRes(R.raw.p3);
 			bmps[3] = getRes(R.raw.p4);
@@ -357,17 +368,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		vcParticle=new Vector<Particle>();	
 	}
 	//返回真实屏幕宽度
-		public	int gWidth()
-		{
-			return this.screenW;
-		}
+	public	int gWidth()
+	{
+		return this.screenW;
+	}
 
 		
 		//返回真实屏幕高度
-		 public  int gHeight()
-		{
-			return screenH;
-		}
+	public  int gHeight()
+	{
+		return screenH;
+	}
 
 	protected void drawCanvas(Canvas canvas) {
 		// 绘制背景图
@@ -401,7 +412,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		if(!pass)
 		{
 			canvas.drawBitmap(bpass, (int)(7*p), (int) (200 + 2 * p), null);
-			//canvas.drawBitmap(bpass, (int)(7*p), (int) (200 + 0.6 * p), null);
+			
 		}
 	     
 		if(colorchange&&starcolor>0&&starcolor<6)
@@ -574,12 +585,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public void changecolor(int x,int col,int row)
 	{
 		int ncol =(int)((x-2.8*p)/(1.2*p))+1;
-		//int nrow =
-	//	Log.i("ncol",""+ncol);
-	//	Log.i("starcolor",""+starcolor);
-	//	Log.i("col",""+col);
-	//	Log.i("row",""+row);
-	//	Log.i("matrix",""+matrix[row][col]);
+		
 		if(starcolor==1){
 			matrix[row][col]= ncol +1;
 			}
@@ -876,12 +882,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 				counts = true;				
 				helper.updateScore(String.valueOf(rank), score);
 				starcounts = helper.getRank()*2;
+				
+				
+				bmobdata(rank,score);
+				
+				
 				rank++;
 				if(srank<rank)
 				{
 					srank =rank;
 				}
-			//	starcounts =starcounts+(score-asking)/500;
+		
 				asking = ((rank + 1) % 2 + 1) * 1000 + asking;
 				tpass =true;
 				
@@ -889,13 +900,53 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			{
 				game = false;
 				music.play(3);
-				//	MyToast.myTosat(mycontext, R.drawable.star5, "", Toast.LENGTH_SHORT);
-				
 				
 			}
 
 		}
 	}
+	
+	public  void bmobdata(int rank ,int score)
+	{
+		
+		BmobQuery<GameScore> query = new BmobQuery<GameScore>();
+		//查询某一关卡的最高分数
+		query.addWhereEqualTo("rank", rank);
+		//返回50条数据，如果不加上这条语句，默认返回10条数据
+		query.setLimit(50);
+		//执行查询方法		
+		final int newscore = score;
+		query.findObjects(mycontext, new FindListener<GameScore>()
+	   {
+			 int old;
+		
+		        @Override
+		        public void onSuccess(List<GameScore> object) {
+		            // TODO Auto-generated method stub
+		            for (GameScore gameScore : object) {		                       
+		             old =  gameScore.getScore();		               
+		            }
+		            //如果查询到的最高分数 小于 新的分数，更新最高分数
+		            if(old <newscore)
+		            {
+		            	gameScore.setScore(newscore);
+		            	gameScore.update(mycontext);
+		            }
+		        }
+		        
+		        @Override
+		        public void onError(int code, String msg) {
+		            // TODO Auto-generated method stub
+//		            toast("查询失败："+msg);
+		        	gameScore.setScore(newscore);
+		        	gameScore.save(mycontext);
+		        }
+		});
+		
+		
+		
+	}
+	
 	public  void logic()
 	{				
 		//星星粒子运动

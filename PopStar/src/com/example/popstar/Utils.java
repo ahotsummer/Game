@@ -1,8 +1,8 @@
 package com.example.popstar;
 
 public class Utils {
-	
-	
+	/*public static int rank;
+	public static int score;*/
 	public static String array2str(int[][] arg) {
 		String b="";
 		for(int i=0;i<10;i++){

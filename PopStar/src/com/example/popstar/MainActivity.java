@@ -5,7 +5,6 @@ import java.io.Serializable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -26,6 +25,13 @@ public class MainActivity extends Activity {
 		// 加载游戏进度数据给GameView
 		myView = new GameView(this);
 		Intent intent = getIntent();
+		
+	/*	String rank = intent.getStringExtra("rrank");
+		myView.rank =Integer.parseInt(rank);
+		String score = intent.getStringExtra("rscore");
+		Log.i(" MainActivity:score", ""+score);
+		myView.score =Integer.parseInt(score);*/
+		
 		Serializable matrix =  intent.getSerializableExtra("matrix");//
 		Object[] b;
 		int[] c;
@@ -46,11 +52,9 @@ public class MainActivity extends Activity {
 
 		// 设置显示GameView界面
 		setContentView(myView);
-	//	Log.i("info","走了啊");
+	
 		if(myView.counts)
 		{
-			Log.i("info", ""+myView.rank);
-			Log.i("info",""+myView.score);
 			intent.putExtra("SRANK", ""+myView.srank);
 			intent.putExtra("RANK", ""+myView.rank);
 			intent.putExtra("SCORE", ""+myView.score);		
@@ -65,6 +69,9 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent();
 
 		intent.putExtra("PROGRESS", Utils.array2str(myView.matrix));
+		/*intent.putExtra("RRANK", myView.rank);
+		intent.putExtra("RSCORE", myView.score);*/
+		
 		intent.putExtra("SRANK", ""+myView.srank);
 		intent.putExtra("RANK", ""+myView.rank);
 		intent.putExtra("SCORE", ""+myView.score);		
