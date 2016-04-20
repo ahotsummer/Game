@@ -32,28 +32,28 @@ import com.example.popstar.db.bomb.UseStar;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 //private Resources res;
-	private Bitmap background; // ÓÎÏ·±³¾°Í¼
-	private Bitmap words;// ÎÄ×ÖÍ¼
-	private Bitmap word1;// ÎÄ×ÖÍ¼
-	private Bitmap word2;// ÎÄ×ÖÍ¼
-	private Bitmap word3;// ÎÄ×ÖÍ¼
-	private Bitmap ui1;// ·ÖÊıÍ¼
-	private Bitmap ui2;// ·ÖÊıÍ¼
-	private Bitmap ui3;// ·ÖÊıÍ¼
-	private Bitmap gameover; // ÓÎÏ·½áÊøÍ¼
-	private Bitmap mplay; // ÒôĞ§Í¼
-	private Bitmap mstop; // ÒôĞ§Í¼
-	private Bitmap bpass; // Í¨¹ØÍ¼
-	private Bitmap lustar; // Í¨¹ØÍ¼
-	private Bitmap bcol; // Í¨¹ØÍ¼
-	private Bitmap brow; // Í¨¹ØÍ¼
+	private Bitmap background; // æ¸¸æˆèƒŒæ™¯å›¾
+	private Bitmap words;// æ–‡å­—å›¾
+	private Bitmap word1;// æ–‡å­—å›¾
+	private Bitmap word2;// æ–‡å­—å›¾
+	private Bitmap word3;// æ–‡å­—å›¾
+	private Bitmap ui1;// åˆ†æ•°å›¾
+	private Bitmap ui2;// åˆ†æ•°å›¾
+	private Bitmap ui3;// åˆ†æ•°å›¾
+	private Bitmap gameover; // æ¸¸æˆç»“æŸå›¾
+	private Bitmap mplay; // éŸ³æ•ˆå›¾
+	private Bitmap mstop; // éŸ³æ•ˆå›¾
+	private Bitmap bpass; // é€šå…³å›¾
+	private Bitmap lustar; // é€šå…³å›¾
+	private Bitmap bcol; // é€šå…³å›¾
+	private Bitmap brow; // é€šå…³å›¾
 	//change
 	private boolean one = false;
 	private boolean two=false;
 	private boolean click = true;
 	private boolean colorchange=false;
-	private Bitmap color; // ¸Ä±äÍ¼
-	private Bitmap again; // ¸Ä±äÍ¼
+	private Bitmap color; // æ”¹å˜å›¾
+	private Bitmap again; // æ”¹å˜å›¾
 	private int starcolor;
 	private boolean change =false;
 	private int starcol;
@@ -63,9 +63,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private int newcol;
 	private int newrow;
 
-	private Bitmap[] starpic = new Bitmap[5]; // ´æ´¢ĞÇĞÇÍ¼Æ¬
+	private Bitmap[] starpic = new Bitmap[5]; // å­˜å‚¨æ˜Ÿæ˜Ÿå›¾ç‰‡
 	public scoreSQLiteOpenHelper helper;
-	private double p; // ĞÇĞÇµÄ±ß³¤
+	private double p; // æ˜Ÿæ˜Ÿçš„è¾¹é•¿
 	public static int screenW,screenH;
 	private int mark;
 	
@@ -73,13 +73,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public  boolean counts = false;
 	public  boolean pass = true;
 	public static boolean play =true;
-	public  int score = 0; // ·ÖÊı
-	public  int rank = 1; // ¹Ø¿¨
+	public  int score = 0; // åˆ†æ•°
+	public  int rank = 1; // å…³å¡
 	public static  int srank = 1;  
 	public  int  starcounts = 0;
 	
-	private int asking = 1000; // Ã¿¹ØÒªÇó
-	private boolean game = true; // ÓÎÏ·ÊÇ·ñ¼ÌĞø
+	private int asking = 1000; // æ¯å…³è¦æ±‚
+	private boolean game = true; // æ¸¸æˆæ˜¯å¦ç»§ç»­
 
 
 	private Music music;
@@ -89,18 +89,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private boolean tpass=true;
 	Bitmap[] bmps = null;
 	
-	final float FRAME_TIME = 1.0F / 60; // ¼Ù¶¨Ã¿Ãë»æÖÆ60Ö¡
+	final float FRAME_TIME = 1.0F / 60; // å‡å®šæ¯ç§’ç»˜åˆ¶60å¸§
 	float stateTime = 0F;
 	List<Animation> sprites = Collections
 			.synchronizedList(new LinkedList<Animation>());
 
 
-	public int[][] matrix = null;//ĞÇĞÇÊı×é
+	public int[][] matrix = null;//æ˜Ÿæ˜Ÿæ•°ç»„
 
-	private List<Node> list = new ArrayList<Node>();//ÒªÏûÃğµÄĞÇĞÇ
+	private List<Node> list = new ArrayList<Node>();//è¦æ¶ˆç­çš„æ˜Ÿæ˜Ÿ
 
-	private Paint paint; // »æÖÆ¼¸ºÎÍ¼ĞÎµÄ»­±Ê
-	private Paint p_text; // »æÖÆ¼¸ºÎÍ¼ĞÎµÄ»­±Ê
+	private Paint paint; // ç»˜åˆ¶å‡ ä½•å›¾å½¢çš„ç”»ç¬”
+	private Paint p_text; // ç»˜åˆ¶å‡ ä½•å›¾å½¢çš„ç”»ç¬”
 	
 	//bombdata
 	private GameScore gameScore ;
@@ -110,17 +110,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	
 	Random random;
 	
-	//ĞÇĞÇÁ£×ÓÍ¼Æ¬µÄÊı×é
+	//æ˜Ÿæ˜Ÿç²’å­å›¾ç‰‡çš„æ•°ç»„
 	Bitmap bmpParticle[];
 
-	//ĞÇĞÇÏûÃğºóÉ¢Éä³öÀ´µÄÁ£×ÓÈİÆ÷
+	//æ˜Ÿæ˜Ÿæ¶ˆç­åæ•£å°„å‡ºæ¥çš„ç²’å­å®¹å™¨
 	Vector<Particle> vcParticle;
 	Context mycontext;
 	
 	public GameView(Context context) {
 		super(context);
 		mycontext= context;
-		// ÉèÖÃ»­±ÊÊôĞÔ£ºÑÕÉ«¡¢ÎŞ¾â³İÆ½»¬¡¢ÊµĞÄÏß
+		// è®¾ç½®ç”»ç¬”å±æ€§ï¼šé¢œè‰²ã€æ— é”¯é½¿å¹³æ»‘ã€å®å¿ƒçº¿
 		paint = new Paint();
 		paint.setColor(Color.RED);
 		paint.setAntiAlias(true);
@@ -134,7 +134,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 		helper = new scoreSQLiteOpenHelper(context,null,null,0);
 		starcounts = helper.getRank()*2;
-		// ÒôĞ§³õÊ¼»¯
+		// éŸ³æ•ˆåˆå§‹åŒ–
 		music  = new Music(context);
 		random=new Random();
 		
@@ -143,15 +143,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		LuckyStar luckystar = new LuckyStar() ;
 		UseStar usestar = new UseStar();
 		
-		// »ñÈ¡holder£¬ÒÔ±ãÎÒÃÇ¿ØÖÆÓÎÏ·½çÃæµÄË¢ĞÂ¹¤×÷
+		// è·å–holderï¼Œä»¥ä¾¿æˆ‘ä»¬æ§åˆ¶æ¸¸æˆç•Œé¢çš„åˆ·æ–°å·¥ä½œ
 		holder = this.getHolder();
 		holder.addCallback(this);
-		// ÉèÖÃÓÎÏ·½çÃæ¿É´¥Ãş
+		// è®¾ç½®æ¸¸æˆç•Œé¢å¯è§¦æ‘¸
 		setFocusable(true);
 		setFocusableInTouchMode(true);
 		requestFocus();
 		
-		//³õÊ¼»¯10*10ĞÇĞÇÊı×é
+		//åˆå§‹åŒ–10*10æ˜Ÿæ˜Ÿæ•°ç»„
 		if (matrix == null) 
 		{
 			matrix = new int[10][10];
@@ -169,7 +169,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	
 	
 	public Animation makeAnimation(float playDuration, float x, float y,int acolor) {
-		// ¼ÓÔØ¶¯»­×ÊÔ´£¬´´½¨¶¯»­¶ÔÏó
+		// åŠ è½½åŠ¨ç”»èµ„æºï¼Œåˆ›å»ºåŠ¨ç”»å¯¹è±¡
 		if(acolor==0){
 			bmps = new Bitmap[10];
 			bmps[0] = getRes(R.raw.p1);
@@ -269,14 +269,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		// ¼ÆËãÆÁÄ»´óĞ¡£¬²¢Ê¹¿íºÍ¸ß·ûºÏÊúÆÁÒªÇó
+		// è®¡ç®—å±å¹•å¤§å°ï¼Œå¹¶ä½¿å®½å’Œé«˜ç¬¦åˆç«–å±è¦æ±‚
 		screenW = (w > h) ? h : w;
 		screenH = (w > h) ? w : h;
 		// ----------------
-		// Ë®Æ½·½Ïò£º10p = screenW
+		// æ°´å¹³æ–¹å‘ï¼š10p = screenW
 		p = screenW / 10;
-		// ¼ÓÔØ±³¾°Í¼Æ¬£¬²¢°´ÕÕµ±Ç°ÆÁÄ»´óĞ¡Ëõ·Å
-		//0À¶É« £¬1ÂÌÉ«£¬2×ÏÉ«£¬3ºìÉ«£¬4»ÆÉ«
+		// åŠ è½½èƒŒæ™¯å›¾ç‰‡ï¼Œå¹¶æŒ‰ç…§å½“å‰å±å¹•å¤§å°ç¼©æ”¾
+		//0è“è‰² ï¼Œ1ç»¿è‰²ï¼Œ2ç´«è‰²ï¼Œ3çº¢è‰²ï¼Œ4é»„è‰²
 		background = Bitmap.createScaledBitmap(getRes(R.drawable.bg_main), screenW, screenH, false);
 		gameover = Bitmap.createScaledBitmap(getRes(R.drawable.gameover), 300, 300, false);
 		starpic[0] = Bitmap
@@ -307,14 +307,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		
 		double ww = words.getWidth();
 		double hh = words.getHeight() / 4;
-		//¶ÔÔ­Î»Í¼½øĞĞËõ·ÅºÍ·Å´ó³ÉĞÂµÄw,h
-		//³¤µÄ
+		//å¯¹åŸä½å›¾è¿›è¡Œç¼©æ”¾å’Œæ”¾å¤§æˆæ–°çš„w,h
+		//é•¿çš„
 		ui3 = Bitmap.createScaledBitmap(getRes(R.drawable.ui3),
 				(int) (3.3 * p), (int) hh, false);
-		//2³¤
+		//2é•¿
 		ui2 = Bitmap.createScaledBitmap(getRes(R.drawable.ui2),
 				(int) (1.7 * p), (int) hh, false);
-		//2¶Ì
+		//2çŸ­
 		ui1 = Bitmap.createScaledBitmap(getRes(R.drawable.ui1),
 				(int) (1 * p), (int) hh, false);
 		
@@ -328,14 +328,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		
 		lustar= Bitmap.createScaledBitmap(getRes(R.drawable.stars),
 			    (int) (hh*1.8), (int) (hh*1.8), false);
-		//¸Ä±ä
+		//æ”¹å˜
 		color= Bitmap.createScaledBitmap(getRes(R.drawable.item_color),
 			    (int) (hh*1.6), (int) (hh*1.6), false);
 		again=Bitmap.createScaledBitmap(getRes(R.drawable.item_shuffle),
 				(int) (hh*1.6), (int) (hh*1.6), false);
 		 
 		 
-		//´ÓsouceµÄÖ¸¶¨×ø±êx,y¿ªÊ¼ÍÚÒ»¸öw,hµÄ¶ÔÏó
+		//ä»souceçš„æŒ‡å®šåæ ‡x,yå¼€å§‹æŒ–ä¸€ä¸ªw,hçš„å¯¹è±¡
 		word1 = Bitmap.createBitmap(words, 0, 0, (int) ww, (int) hh);
 		word2 = Bitmap.createBitmap(words, 0, (int) (hh), (int) (ww * 0.5),
 				(int) hh);
@@ -348,40 +348,40 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	
 	public  void initGame(int screenW,int screenH)
 	{
-		//É¢Éä³öÀ´µÄĞÇĞÇÁ£×ÓÑÕÉ«Êı×é£¬ÓÃÓÚäÖÈ¾Á£×ÓÍ¼Æ¬
+		//æ•£å°„å‡ºæ¥çš„æ˜Ÿæ˜Ÿç²’å­é¢œè‰²æ•°ç»„ï¼Œç”¨äºæ¸²æŸ“ç²’å­å›¾ç‰‡
 		int colors[]={0xffff00ff,0xff00ec00,0xffffff00,0xffff0000,0xff00ffff};
 													
-		//Á£×ÓµÄÍ¼Æ¬
+		//ç²’å­çš„å›¾ç‰‡
 		Bitmap bmpTemp = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
 				getResources(), R.drawable.particle), screenW/30, screenW/30, false);
-		//Á£×ÓÍ¼Æ¬µÄÊı×é
+		//ç²’å­å›¾ç‰‡çš„æ•°ç»„
 		bmpParticle=new Bitmap[colors.length];
 	
-		//Á£×ÓÍ¼Æ¬Êı×éÊµÀı»¯
-		//ÓÉÓÚ¸ÃÁ£×ÓÍ¼Æ¬Ö»ÓĞÒ»ÕÅ£¬½«ËüäÖÈ¾³É²»Í¬µÄÑÕÉ«
+		//ç²’å­å›¾ç‰‡æ•°ç»„å®ä¾‹åŒ–
+		//ç”±äºè¯¥ç²’å­å›¾ç‰‡åªæœ‰ä¸€å¼ ï¼Œå°†å®ƒæ¸²æŸ“æˆä¸åŒçš„é¢œè‰²
 		for(int i=0;i<colors.length;i++) 
 		{
 			bmpParticle[i]=changBitmapColor(bmpTemp,colors[i]);
 		}
 	
-		//Á£×ÓÈİÆ÷
+		//ç²’å­å®¹å™¨
 		vcParticle=new Vector<Particle>();	
 	}
-	//·µ»ØÕæÊµÆÁÄ»¿í¶È
+	//è¿”å›çœŸå®å±å¹•å®½åº¦
 	public	int gWidth()
 	{
 		return this.screenW;
 	}
 
 		
-		//·µ»ØÕæÊµÆÁÄ»¸ß¶È
+		//è¿”å›çœŸå®å±å¹•é«˜åº¦
 	public  int gHeight()
 	{
 		return screenH;
 	}
 
 	protected void drawCanvas(Canvas canvas) {
-		// »æÖÆ±³¾°Í¼
+		// ç»˜åˆ¶èƒŒæ™¯å›¾
 		canvas.drawBitmap(background, 0, 0, null);
 		
 		canvas.drawBitmap(word1, 5, 70, null);
@@ -453,7 +453,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// »ñÈ¡´¥Ãş¶¯×÷ÀàĞÍºÍ´¥ÃşÎ»ÖÃµÄ×ø±ê
+		// è·å–è§¦æ‘¸åŠ¨ä½œç±»å‹å’Œè§¦æ‘¸ä½ç½®çš„åæ ‡
 		int act = event.getAction();
 		int x = (int) event.getX();
 		int y = (int) event.getY();
@@ -462,11 +462,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		
 		if (x<900&&x>750&&y<350&&y>200)
 		{
-			//²»ÄÜÉ¢
+			//ä¸èƒ½æ•£
 			click = false;
 			one =true;
 			two =false;
-			Toast.makeText(mycontext, "µã»÷ĞèÒª»»ÑÕÉ«µÄĞÇĞÇ", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mycontext, "ç‚¹å‡»éœ€è¦æ¢é¢œè‰²çš„æ˜Ÿæ˜Ÿ", Toast.LENGTH_SHORT).show();
 		}
 		if (x<1200&&x>900&&y<350&&y>200)
 		{//	x900-1000
@@ -474,7 +474,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			click = false;
 			two =true;
 			one = false;
-			Toast.makeText(mycontext, "µã»÷ĞèÒªÖØĞÂÅÅÁĞµÄĞÇĞÇ", Toast.LENGTH_SHORT).show();	
+			Toast.makeText(mycontext, "ç‚¹å‡»éœ€è¦é‡æ–°æ’åˆ—çš„æ˜Ÿæ˜Ÿ", Toast.LENGTH_SHORT).show();	
 		}
 		
 
@@ -488,7 +488,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 					isSelect(col,row);
 				
 					list.clear();
-					// Ôö¼Ó¶¯»­Ğ§¹û
+					// å¢åŠ åŠ¨ç”»æ•ˆæœ
 					sortStar();
 					// invalidate();
 					ifClear(col,row);
@@ -497,7 +497,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		case MotionEvent.ACTION_UP:
 		//	Log.i("x",""+x);
 		//	Log.i("y",""+y);
-		//	Log.i("col¼ô¼­Ê±¼ä",""+col);
+		//	Log.i("colå‰ªè¾‘æ—¶é—´",""+col);
 		//	Log.i("row",""+row);
 			if(col >= 0 && row >= 0&&!click)
 			{				
@@ -624,13 +624,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	}
 	public void isSelect(int col,int row)
 	{
-		 //ÅĞ¶ÏµãÖĞµÄÊÇ·ñÎª0
+		 //åˆ¤æ–­ç‚¹ä¸­çš„æ˜¯å¦ä¸º0
 			mark = matrix[row][col];
 			
 			list.add(new Node(row, col,(mark-1)));
-			List<Node> nodepoint = getRoundNode(list.get(0));//¸½½üÊÇ·ñ´æÔÚĞÎÍ¬µÄµã
+			List<Node> nodepoint = getRoundNode(list.get(0));//é™„è¿‘æ˜¯å¦å­˜åœ¨å½¢åŒçš„ç‚¹
 			if (nodepoint.size() > 0) 
-			{ // Èç¹û¸½½üµÄ´æÔÚÏàÍ¬µã£¬Ôò
+			{ // å¦‚æœé™„è¿‘çš„å­˜åœ¨ç›¸åŒç‚¹ï¼Œåˆ™
 				matrix[row][col] = 0;
 				for (int i = 0; i < list.size(); i++)
 				{
@@ -652,7 +652,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 									//Log.i("color",""+nodes.get(j).color);
 							
 								}
-								//Log.i("info","µ½ÁËvcParticle.addElement");
+								//Log.i("info","åˆ°äº†vcParticle.addElement");
 							}
 						}
 					}
@@ -722,7 +722,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		
 	}
 	
-	private List<Node> getRoundNode(Node sameNode) {// Ñ°ÕÒÉÏÏÂ×óÓÒËÄ¸öĞÇĞÇ
+	private List<Node> getRoundNode(Node sameNode) {// å¯»æ‰¾ä¸Šä¸‹å·¦å³å››ä¸ªæ˜Ÿæ˜Ÿ
 		List<Node> nodes = new ArrayList<Node>();
 
 		int col = sameNode.col;
@@ -730,26 +730,26 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		int color = sameNode.color;
 
 		if ((row - 1) >= 0 && matrix[row - 1][col] == mark) {
-			nodes.add(new Node(row - 1, col,color));// ÉÏ
+			nodes.add(new Node(row - 1, col,color));// ä¸Š
 		}
 
 		if ((row + 1) <= 9 && matrix[row + 1][col] == mark) {
-			nodes.add(new Node(row + 1, col,color));// ÏÂ
+			nodes.add(new Node(row + 1, col,color));// ä¸‹
 		}
 
 		if ((col - 1) >= 0 && matrix[row][col - 1] == mark) {
-			nodes.add(new Node(row, col - 1,color));// ×ó
+			nodes.add(new Node(row, col - 1,color));// å·¦
 		}
 
 		if ((col + 1) <= 9 && matrix[row][col + 1] == mark) {
-			nodes.add(new Node(row, col + 1,color));// ÓÒ
+			nodes.add(new Node(row, col + 1,color));// å³
 		}
 
 		return nodes;
 	}
 
 	/**
-	 * ¶Ô¸Ä¶¯ºóµÄÊı×é½øĞĞÅÅĞò´¦Àí
+	 * å¯¹æ”¹åŠ¨åçš„æ•°ç»„è¿›è¡Œæ’åºå¤„ç†
 	 */
 	private void sortStar() {
 		for (int i = 0; i < 10; i++) {
@@ -761,7 +761,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 					matrix[0][j] = 0;
 				}
 			}
-		}// 0µÄÉÏ¸¡²Ù×÷
+		}// 0çš„ä¸Šæµ®æ“ä½œ
 
 		for (int i = 8; i >= 0; i--) {
 			if (matrix[9][i] == 0) {
@@ -774,11 +774,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 					matrix[j][9] = 0;
 				}
 			}
-		}// Êı×éµÄ×ó¿¿½ô´¦Àí
+		}// æ•°ç»„çš„å·¦é ç´§å¤„ç†
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÒÑ¾­ÏûÍê»òÕßÓÎÏ·over
+	 * åˆ¤æ–­æ˜¯å¦å·²ç»æ¶ˆå®Œæˆ–è€…æ¸¸æˆover
 	 */
 	private void ifClear(int col,int row) {
 		
@@ -856,9 +856,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			
 			if (score >= asking) 
 			{
-				//Í¨¹Ø¶¯»­
+				//é€šå…³åŠ¨ç”»
 				pass=true;
-				//ÒôÀÖ
+				//éŸ³ä¹
 				music.play(5);
 			
 				tpass=false;
@@ -906,16 +906,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		}
 	}
 	
-	public  void bmobdata(int rank ,int score)
+public  void bmobdata(int rank ,int score)
 	{
 		
 		BmobQuery<GameScore> query = new BmobQuery<GameScore>();
-		//²éÑ¯Ä³Ò»¹Ø¿¨µÄ×î¸ß·ÖÊı
+		//æŸ¥è¯¢æŸä¸€å…³å¡çš„æœ€é«˜åˆ†æ•°
 		query.addWhereEqualTo("rank", rank);
-		//·µ»Ø50ÌõÊı¾İ£¬Èç¹û²»¼ÓÉÏÕâÌõÓï¾ä£¬Ä¬ÈÏ·µ»Ø10ÌõÊı¾İ
+		//è¿”å›50æ¡æ•°æ®ï¼Œå¦‚æœä¸åŠ ä¸Šè¿™æ¡è¯­å¥ï¼Œé»˜è®¤è¿”å›10æ¡æ•°æ®
 		query.setLimit(50);
-		//Ö´ĞĞ²éÑ¯·½·¨		
+		//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•		
+		final int newrank = rank;
 		final int newscore = score;
+		Log.i("score",""+score);
 		query.findObjects(mycontext, new FindListener<GameScore>()
 	   {
 			 int old;
@@ -926,34 +928,61 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		            for (GameScore gameScore : object) {		                       
 		             old =  gameScore.getScore();		               
 		            }
-		            //Èç¹û²éÑ¯µ½µÄ×î¸ß·ÖÊı Ğ¡ÓÚ ĞÂµÄ·ÖÊı£¬¸üĞÂ×î¸ß·ÖÊı
+		            //å¦‚æœæŸ¥è¯¢åˆ°çš„æœ€é«˜åˆ†æ•° å°äº æ–°çš„åˆ†æ•°ï¼Œæ›´æ–°æœ€é«˜åˆ†æ•°
 		            if(old <newscore)
 		            {
+		            	
 		            	gameScore.setScore(newscore);
-		            	gameScore.update(mycontext);
+		            	gameScore.update(mycontext,gameScore.getObjectId(), new UpdateListener() {
+
+		            	    @Override
+		            	    public void onSuccess() {
+		            	        // TODO Auto-generated method stub
+		            	        Log.i("bmob","æ›´æ–°æˆåŠŸï¼š");
+		            	    }
+
+		            	    @Override
+		            	    public void onFailure(int code, String msg) {
+		            	        // TODO Auto-generated method stub
+		            	        Log.i("bmob","æ›´æ–°å¤±è´¥ï¼š"+msg);
+		            	    }
+		            	});
 		            }
 		        }
-		        
+		        //æŸ¥è¯¢ä¸åˆ°å°±æ·»åŠ å…³å¡å’Œåˆ†æ•°
 		        @Override
 		        public void onError(int code, String msg) {
 		            // TODO Auto-generated method stub
-//		            toast("²éÑ¯Ê§°Ü£º"+msg);
+//		            toast("æŸ¥è¯¢å¤±è´¥ï¼š"+msg);
+		        	gameScore.setScore(newrank);
 		        	gameScore.setScore(newscore);
-		        	gameScore.save(mycontext);
+		       
+		        	gameScore.save(mycontext, new SaveListener() {
+
+		        	    @Override
+		        	    public void onSuccess() {
+		        	    	  Log.i("bmob","æ·»åŠ æˆåŠŸï¼š");
+		        	    }
+
+		        	    @Override
+		        	    public void onFailure(int code, String arg0) {
+		        	        // æ·»åŠ å¤±è´¥
+		        	    	  Log.i("bmob","æ·»åŠ å¤±è´¥ï¼š");
+		        	    }
+		        	});
+		       
 		        }
-		});
-		
-		
-		
+		});	
 	}
+	
 	
 	public  void logic()
 	{				
-		//ĞÇĞÇÁ£×ÓÔË¶¯
+		//æ˜Ÿæ˜Ÿç²’å­è¿åŠ¨
 		for(int i=0;i<vcParticle.size();i++)
 		{
 			Particle particle=vcParticle.elementAt(i);
-			//Á£×ÓÏûÍö£¬ÒÆ³ıÁ£×Ó
+			//ç²’å­æ¶ˆäº¡ï¼Œç§»é™¤ç²’å­
 			if(particle.isDead)
 			{
 				vcParticle.removeElementAt(i);
@@ -974,7 +1003,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		// Æô¶¯½çÃæË¢ĞÂÏß³Ì
+		// å¯åŠ¨ç•Œé¢åˆ·æ–°çº¿ç¨‹
 		Thread render = new Thread(new GameRender());
 		finished = false;
 		render.start();
@@ -991,13 +1020,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// Í¨Öª½çÃæË¢ĞÂÏß³ÌÖÕÖ¹ÍË³ö
+		// é€šçŸ¥ç•Œé¢åˆ·æ–°çº¿ç¨‹ç»ˆæ­¢é€€å‡º
 		finished = true;
         music.release();
 	}
 
 	/**
-	 * ÄÚ²¿ÀàGameRender£¬ÓÃÓÚË¢ĞÂÓÎÏ·½çÃæ
+	 * å†…éƒ¨ç±»GameRenderï¼Œç”¨äºåˆ·æ–°æ¸¸æˆç•Œé¢
 	 */
 	private class GameRender implements Runnable {
 
@@ -1009,17 +1038,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			Animation sprite;
 
 			while (!finished) {
-				// »ñÈ¡½çÃæË¢ĞÂ´úÂëÖ´ĞĞÖ®Ç°µÄÊ±¼ä£¬µ¥Î»ºÁÃë
+				// è·å–ç•Œé¢åˆ·æ–°ä»£ç æ‰§è¡Œä¹‹å‰çš„æ—¶é—´ï¼Œå•ä½æ¯«ç§’
 				tick0 = System.currentTimeMillis();
 				
-				// Ë¢ĞÂÓÎÏ·½çÃæ
+				// åˆ·æ–°æ¸¸æˆç•Œé¢
 				try {
-					// Ëø¶¨»­²¼
+					// é”å®šç”»å¸ƒ
 					Canvas canvas = holder.lockCanvas(null);
 					if (canvas != null) {
 						drawCanvas(canvas);
 						//holder.
-						//»­°åÉÏ»­Êı×Ö
+						//ç”»æ¿ä¸Šç”»æ•°å­—
 						canvas.drawText(asking + "", (int) (5.3 * p), 90, p_text);
 						canvas.drawText(score + "", (int) (90 + 5.2 * p),
 								(int) (100 + 0.6 * p), p_text);
@@ -1027,14 +1056,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 								(int) (110 + 0.6 * p), p_text);
 						canvas.drawText(starcounts + "", (int)(16+2*p), 
 								(int) (182 + 1 * p), p_text);
-						//»­°åÉÏ»­ĞÇĞÇ
+						//ç”»æ¿ä¸Šç”»æ˜Ÿæ˜Ÿ
 						for (int i = 0; i < 10; i++) 
 						{
 							for (int j = 0; j < 10; j++) 
 							{
 								if (matrix[i][j] != 0) 
 								{
-						//½«ĞÇĞÇ»­ÔÚviewÉÏ
+						//å°†æ˜Ÿæ˜Ÿç”»åœ¨viewä¸Š
 									canvas.drawBitmap(
 											starpic[matrix[i][j] - 1],
 											(float) (j * p), (float) (screenH
@@ -1053,14 +1082,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 							//music.play(3);
 						}
 						// ==================================
-						// »æÖÆ¶¯»­Ö¡
+						// ç»˜åˆ¶åŠ¨ç”»å¸§
 						stoppedAnims.clear();
-					//	Log.i("infoºóÀ´",""+sprites.size());
-						// ×¢£ºÕâÀï²»ÄÜÊ¹ÓÃfor-eachÑ­»·£¬ÒòÎªÑ­»·¹ı³ÌÖĞ¿ÉÄÜ»áÓĞ´¥ÃşÊÂ¼ş·¢Éú£¬¶¯Ì¬Êı×éµÄÔªËØ¸öÊı»á±ä
+					//	Log.i("infoåæ¥",""+sprites.size());
+						// æ³¨ï¼šè¿™é‡Œä¸èƒ½ä½¿ç”¨for-eachå¾ªç¯ï¼Œå› ä¸ºå¾ªç¯è¿‡ç¨‹ä¸­å¯èƒ½ä¼šæœ‰è§¦æ‘¸äº‹ä»¶å‘ç”Ÿï¼ŒåŠ¨æ€æ•°ç»„çš„å…ƒç´ ä¸ªæ•°ä¼šå˜
 						for (int i = 0; i < sprites.size(); i++) {
 							sprite = sprites.get(i);
 							sprite.draw(stateTime, canvas);
-							// Èç¹ûÄ³¶¯»­¶ÔÏó²¥·ÅÍê£¬Ôò½«Æä·ÅÈëÉ¾³ı¶ÓÁĞ
+							// å¦‚æœæŸåŠ¨ç”»å¯¹è±¡æ’­æ”¾å®Œï¼Œåˆ™å°†å…¶æ”¾å…¥åˆ é™¤é˜Ÿåˆ—
 							if (sprite.isStopped()) {
 								stoppedAnims.add(sprite);
 							}
@@ -1068,18 +1097,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 						sprites.removeAll(stoppedAnims);
 						logic();
 						// =======================================
-						// »ñÈ¡½çÃæË¢ĞÂ´úÂëÖ´ĞĞÖ®ºóµÄÊ±¼ä£¬µ¥Î»ºÁÃë
+						// è·å–ç•Œé¢åˆ·æ–°ä»£ç æ‰§è¡Œä¹‹åçš„æ—¶é—´ï¼Œå•ä½æ¯«ç§’
 						tick1 = System.currentTimeMillis();
-						// ¼ÆËã»æÍ¼Ëù»¨Ê±¼ä(Ãë)£¬È·±£Ö¡ÂÊ²»´óÓÚ60
+						// è®¡ç®—ç»˜å›¾æ‰€èŠ±æ—¶é—´(ç§’)ï¼Œç¡®ä¿å¸§ç‡ä¸å¤§äº60
 						deltaTime = (tick1 - tick0) / 1000F;
 						if (deltaTime < FRAME_TIME) {
 							Thread.sleep((long) (1000 * (FRAME_TIME - deltaTime)));
 							deltaTime = FRAME_TIME;
 						}
-						// ½âËø»­²¼£¬ÒÔ±ã»­ÃæÔÚÆÁÄ»ÉÏÏÔÊ¾
+						// è§£é”ç”»å¸ƒï¼Œä»¥ä¾¿ç”»é¢åœ¨å±å¹•ä¸Šæ˜¾ç¤º
 						holder.unlockCanvasAndPost(canvas);
 
-						// ¼ÆËãÓÎÏ·ÔËĞĞµÄÀÛ»ıÊ±¼ä
+						// è®¡ç®—æ¸¸æˆè¿è¡Œçš„ç´¯ç§¯æ—¶é—´
 						tick1 = System.currentTimeMillis();
 						stateTime = stateTime + (tick1 - tick0) / 1000F;
 					}
@@ -1090,14 +1119,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		}// of run()
 	}// of class GameRender
 	
-	//·µ»ØÍ¼Æ¬×ÊÔ´/
+	//è¿”å›å›¾ç‰‡èµ„æº/
 	 
 	public Bitmap getRes(int resID) {
 		return BitmapFactory.decodeResource(getResources(),resID);
 	}
 	
 
-	//½«Ò»ÕÅÍ¼Æ¬Ìî³äÖ¸¶¨ÑÕÉ«
+	//å°†ä¸€å¼ å›¾ç‰‡å¡«å……æŒ‡å®šé¢œè‰²
 		public Bitmap changBitmapColor(Bitmap bmp,int endColor)
 		{Bitmap bmpTemp=Bitmap.createBitmap(bmp.getWidth(),bmp.getHeight(),Bitmap.Config.ARGB_8888);
 		Canvas canvas=new Canvas(bmpTemp);
